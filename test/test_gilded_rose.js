@@ -2,14 +2,14 @@ var { expect } = require("chai");
 var { Shop, Item } = require("../src/gilded_rose.js");
 
 describe("Gilded Rose", function () {
-  it("When item name is foo and quality is 2, the quality reduces to 0", function () {
-    const gildedRose = new Shop([new Item("foo", 0, 2)]);
+  it("When item name is other and quality is 2, the quality reduces to 0", function () {
+    const gildedRose = new Shop([new Item("other", 0, 2)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(0);
   });
 
-  it("When item name is foo and quality is 0, the quality stays 0", function () {
-    const gildedRose = new Shop([new Item("foo", 0, 0)]);
+  it("When item name is other and quality is 0, the quality stays 0", function () {
+    const gildedRose = new Shop([new Item("other", 0, 0)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(0);
   });
@@ -29,9 +29,9 @@ describe("Gilded Rose", function () {
 
 
   it("When item name is Sulfuras, Hand of Ragnaros and sellIn is negative quality stays same", function () {
-    const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", -1, 2)]);
+    const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", -1, 80)]);
     const items = gildedRose.updateQuality();
-    expect(items[0].sellIn).to.equal(-1);
+    expect(items[0].quality).to.equal(80);
   });
 
 
@@ -70,16 +70,16 @@ describe("Gilded Rose", function () {
   });
 
 
-  it("When name Backstage passes to a TAFKAL80ETC concert, sellin 1 and quality 50, quality decreases by one", function () {
-    const gildedRose = new Shop([new Item("foo", 1, 50)]);
+  it("When name Conjured, sellin 1 and quality 50, quality decreases by one", function () {
+    const gildedRose = new Shop([new Item("Conjured", 1, 50)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(49);
   });
 
   it("When name Sulfuras, Hand of Ragnaros, sellin negative and quality 50, quality stays the same", function () {
-    const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", -1,50)]);
+    const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", -1,80)]);
     const items = gildedRose.updateQuality();
-    expect(items[0].quality).to.equal(50);
+    expect(items[0].quality).to.equal(80);
   });
 
   it("When name Aged Brie, sellin negative and quality 50, quality stays the same", function () {
