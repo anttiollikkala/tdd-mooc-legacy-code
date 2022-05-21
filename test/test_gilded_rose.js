@@ -70,8 +70,8 @@ describe("Gilded Rose", function () {
   });
 
 
-  it("When name Conjured, sellin 1 and quality 50, quality decreases by one", function () {
-    const gildedRose = new Shop([new Item("Conjured", 1, 50)]);
+  it("When name other, sellin 1 and quality 50, quality decreases by one", function () {
+    const gildedRose = new Shop([new Item("other", 1, 50)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(49);
   });
@@ -92,6 +92,18 @@ describe("Gilded Rose", function () {
     const gildedRose = new Shop();
     const items = gildedRose.updateQuality();
     expect(items.length).to.equal(0);
+  });
+
+  it("Conjured item degrades twice as fast when sellIn positive", function () {
+    const gildedRose = new Shop([new Item("Conjured", 10,50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(48);
+  });
+
+  it("Conjured item degrades twice as fast when sellIn negative", function () {
+    const gildedRose = new Shop([new Item("Conjured", -1,50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(46);
   });
 
 });

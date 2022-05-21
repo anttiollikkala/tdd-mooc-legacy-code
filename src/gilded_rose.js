@@ -30,6 +30,11 @@ class Shop {
                 case "Sulfuras, Hand of Ragnaros":
                     item.quality = 80
                     break
+                case "Conjured":
+                    if (item.quality > 0) item.quality -= 2
+                    if (item.quality > 0 && item.sellIn < 0 ) item.quality -= 2;
+                    item.quality = Math.max(0, item.quality)
+                    break
                 default:
                     if (item.quality > 0) item.quality--
                     if (item.quality > 0 && item.sellIn < 0 ) item.quality--;
